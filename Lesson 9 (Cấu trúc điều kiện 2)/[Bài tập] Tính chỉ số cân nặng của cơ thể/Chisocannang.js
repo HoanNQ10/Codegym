@@ -1,0 +1,39 @@
+
+    function calculateBMI() {
+    // lấy giá trị cân nặng
+    const weight = parseFloat(document.getElementById('weight').value);
+    // lấy giá trị chiều cao
+    const height = parseFloat(document.getElementById('height').value);
+
+    // kiểm tra giá trị nhập vào
+    if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+    alert("Vui lòng nhập một giá trị hợp lệ");
+    return;
+}
+
+    // Tính chỉ số BMI
+    const bmi = weight / (height * height);
+
+
+    // xác định thông điệp đánh giá theo chỉ số BMI
+    let grade = "";
+    if (bmi < 16) {
+    grade = "Bạn Gầy độ 3. Ăn thật nhiều vào nhé!";
+} else if (bmi >= 16 && bmi < 17) {
+    grade = "Bạn Gầy độ 2. Cần tăng cân ngay!";
+} else if (bmi >= 17 && bmi < 18.5) {
+    grade = "Bạn Gầy độ 1. Cố gắng ăn thêm nhé!";
+} else if (bmi >= 18.5 && bmi < 25) {
+    grade = "Bạn có cân nặng bình thường. Tiếp tục duy trì nhé!";
+} else if (bmi >= 25 && bmi < 30) {
+    grade = "Bạn Thừa cân. Hãy chú ý đến chế độ ăn uống!";
+} else if (bmi >= 30) {
+    grade = "Bạn bị Béo phì. Cần điều chỉnh chế độ ăn uống và tập luyện!";
+}
+
+
+
+    // hiển thị kết quả BMI và thông điệp
+    const resultDiv = document.getElementById("result");
+    resultDiv.innerText = `Chỉ số BMI là: ${bmi.toFixed(20)}. ${grade}`;
+}
