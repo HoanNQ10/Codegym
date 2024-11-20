@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+</head>
+<body>
+<!-- Đặt tiều đề -->
+<h1>Calculator</h1>
+<br>
+<!-- Tạo form -->
+<form id="scoreForm">
+    <!-- Tạp ô nhập dữ liệu -->
+    <input type="number" id="number1" name="number1">
+    <input type="number" id="number2" name="number2">
+    <br><br>
+    <!-- Tạo nút cộng trừ nhân chia -->
+    <button type="button" onclick="addition();">Addition(+)</button>
+    <button type="button" onclick="subtraction();">Subtraction(-)</button>
+    <button type="button" onclick="multiplication();">Multiplication(x)</button>
+    <button type="button" onclick="division();">Division(/)</button>
+</form>
+<!-- Hiển thị kết quả -->
+    <div class="result" id="result"></div>
+
+<!-- Nhúng file JS vào HTML -->
+    <script src="Ung_dung_may_tinh.js"></script>
+
+</body>
+</html>

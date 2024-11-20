@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Chương trình nhập điểm cho sinh viên</title>
+</head>
+<body>
+    <!-- tạo bảng nhập điểm -->
+    <form id="scoreForm">
+    <table border="1">
+        <tr>
+            <th> Môn học </th>
+            <th> Vật lý </th>
+            <th> Hóa học </th>
+            <th> Sinh học </th>
+        </tr>
+        <tr>
+            <th> Điểm </th>
+            <th><input type="number" id="physics" min="0" max="10" step="0.1" required></th>
+            <th><input type="number" id="chemistry" min="0" max="10" step="0.1" required></th>
+            <th><input type="number" id="biology" min="0" max="10" step="0.1" required></th>
+        </tr>
+    </table>
+    <br>
+
+    <!-- tạo nút tính điểm trung bình -->
+    <button type="button" onclick="calculateScores();"> Tính điểm trung bình </button>
+    </form>
+    <div class="result" id="result"></div>
+
+    <!-- nhúng file JS vào HTML-->
+    <script src="Bai_1.js"></script>
+
+</body>
+</html>

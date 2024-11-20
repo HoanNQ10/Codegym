@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ứng dụng chuyển đổi tiền tệ</title>
+</head>
+<body>
+<form action="">
+  <!-- Tạo bảng ứng dụng chuyển đổi tiền tệ -->
+  <table>
+    <tr>
+      <td>
+        <label>Amount</label><br>
+        <input type = "text" name = "" id="amount">
+      </td>
+      <td><label>From Currency</label><br>
+        <select id="from">
+          <option value="Viet Nam">Viet Nam</option>
+          <option value="USD">USD</option>
+        </select>
+      </td>
+      <td>
+        <label>To Currency</label><br>
+        <select id="to">
+          <option value="USD">USD</option>
+          <option value="Viet Nam">Viet Nam</option>
+        </select>
+      </td>
+      <td>
+        <button type="button" onclick="convertCurrency()">Convert</button>
+      </td>
+    </tr>
+  </table>
+</form>
+<script>
+  function convertCurrency(){
+    // Lấy giá trị của amount
+    const amount = document.getElementById("amount").value;
+    // Lấy giá trị của fromCurrency
+    const from = document.getElementById("from").value;
+    // Lấy giá trị của To currency
+    const to = document.getElementById("to").value;
+
+    console.log(amount)
+    console.log(from)
+    console.log(to)
+    const tyGia = 25345;
+    let result;
+
+    if (from == 'Viet Nam' && to == 'USD') {
+      result = amount / tyGia;
+      alert ("$" + Math.floor(result));
+    } else if (from == 'USD' && to == 'Viet Nam') {
+      result = amount * tyGia;
+      alert (result + "VND" );
+    }
+
+  }
+</script>
+</body>
+</html>
