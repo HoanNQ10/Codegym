@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiểm tra số ngày trong tháng</title>
+</head>
+<body>
+  <h1>Kiểm tra số ngày trong tháng</h1>
+  <input type = "number" id = "month" placeholder = "Nhập tháng">
+  <button type = "button" onclick = "checkDays()"> Check </button>
+  <p id="result"></p>
+
+  <script>
+  function checkDays() {
+    const month = parseInt(document.getElementById("month").value);
+    const resultElement = document.getElementById("result");
+
+
+    // Kiểm tra tháng nhập vào có hợp lệ không
+    if (month < 1 || month > 12 || isNaN(month)) {
+      resultElement.textContent = "Vui lòng nhập lại tháng.";
+      return;
+    }
+
+    let day;
+    switch (month) {
+      case 1:
+      case 3:
+      case 5:
+      case 7:
+      case 8:
+      case 10:
+      case 12:
+        day = 31;
+        break;
+      case 2:
+      case 4:
+      case 6:
+      case 9:
+      case 11:
+        day = 30;
+        break;
+
+      default:
+    }
+
+    resultElement.textContent = `Tháng ${month} có ${day} ngày.`;
+  }
+
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>
