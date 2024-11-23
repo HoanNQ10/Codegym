@@ -21,8 +21,8 @@
       resultElement.textContent = "Vui lòng nhập lại tháng.";
       return;
     }
+    let days;
 
-    let day;
     switch (month) {
       case 1:
       case 3:
@@ -31,20 +31,24 @@
       case 8:
       case 10:
       case 12:
-        day = 31;
+        days = 31;
         break;
-      case 2:
+
       case 4:
       case 6:
       case 9:
       case 11:
-        day = 30;
+        days = 30;
+        break;
+
+      case 2:
+        days  = "28 hoặc 29"
         break;
 
       default:
     }
 
-    resultElement.textContent = `Tháng ${month} có ${day} ngày.`;
+    resultElement.textContent = `Tháng ${month} có ${days} ngày.`;
   }
 
 
