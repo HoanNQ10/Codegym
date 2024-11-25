@@ -5,10 +5,23 @@
     <title>Bảng cửu chương</title>
 </head>
 <body>
-<script>
-    var number = 1;
+<table border = 1>
 
-    console.log(number++); // 1
+<tbody id="resultTable">
+
+</tbody>
+</table>
+<script>
+    for (var i = 2; i <= 9; i++) {
+        var row = "<tr>";
+        for ( var j = 1; j <= 9; j++){
+
+            var product = i * j;
+            row += "<td>" + i + " x " + j + " = " + product + "</td>";
+
+        }
+        document.getElementById('resultTable').innerHTML += row;
+    }
 </script>
 </body>
 </html>
