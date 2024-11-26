@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let x = [-3,5,1,3,2,10]; //khởi tạo mảng ban đầuc
+    let first = 0; // khởi tạo chỉ số đầu tiên, trỏ tới phần tử -3
+    let last = x.length - 1; // khởi tạo chỉ số last trỏ đến phần tử 10
+
+    // vòng lặp while điều kiện first < last
+    // đảm bảo rằng vòng lặp chạy cho đến khi chỉ số first gặp chỉ số last
+    while (first < last) {
+        let b = x[first]; // Giá trị phần tử tại chỉ số first được lưu vào biến tạm b
+        x[first] = x[last]; // Đổi phần tử tại "first" thành phần tử tại "last"
+        x[last] = b; // Đổi phần tử tại "last" thành giá trị tạm "b"
+        first++; //chỉ số first tăng lên (di chuyển về phần tử tiếp theo từ đầu mảng).
+        last-- //chỉ số last giảm xuống (di chuyển về phần tử tiếp theo từ cuối mảng).
+    }
+    document.write(x);
+</script>
+</body>
+</html>
