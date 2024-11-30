@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Xếp hạng học lực của học sinh</h1>
+<input type="number" id="a" placeholder="Điểm bài kiểm tra"><br><br>
+<input type="number" id="b" placeholder="Điểm thi giữa kỳ"><br><br>
+<input type="number" id="c" placeholder="Điểm thi cuối kỳ"><br><br>
+<button type="button" onclick="check()">Xếp hạng</button>
+<div id="result"></div>
+
+<script>
+  function check() {
+    const a = parseFloat(document.getElementById("a").value);
+    const b = parseFloat(document.getElementById("b").value);
+    const c = parseFloat(document.getElementById("c").value);
+
+    let gpa = (a * 0.2) + (b * 0.3) + (c * 0.5);
+    if (gpa >= 8.0) {
+      document.getElementById("result").innerHTML = `Điểm trung bình là ${gpa} => Học sinh xếp loại giỏi`;
+    } else if (gpa >= 6.5 && gpa < 8.0) {
+      document.getElementById("result").innerHTML = `Điểm trung bình là ${gpa} => Học sinh xếp loại khá`;
+    } else if (gpa >= 5.0 && gpa < 6.5) {
+      document.getElementById("result").innerHTML = `Điểm trung bình là ${gpa} => Học sinh xếp loại trung bình`;
+    } else {
+      document.getElementById("result").innerHTML = `Điểm trung bình là ${gpa} => Học sinh xếp loại yếu`;
+    }
+  }
+</script>
+</body>
+</html>

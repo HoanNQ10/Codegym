@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <h1>Tìm giá trị lớn nhất</h1>
+  <input type="number" id="a" placeholder="Nhập số nguyên thứ 1"><br><br>
+  <input type="number" id="b" placeholder="Nhập số nguyên thứ 2"><br><br>
+  <input type="number" id="c" placeholder="Nhập số nguyên thứ 3"><br><br>
+  <button type="button" onclick="find()">check</button>
+  <div id="result"></div>
+
+  <script>
+    function find() {
+      const a = parseFloat(document.getElementById("a").value);
+      const b = parseFloat(document.getElementById("b").value);
+      const c = parseFloat(document.getElementById("c").value);
+
+      let max;
+      if (a >=b && a >=c) {
+        max = a;
+      } else if(b >= a && b >= c) {
+        max = b;
+      } else {
+        max = c;
+      }
+
+      document.getElementById("result").innerHTML = `Giá trị lớn nhất trong 3 số là: ${max}`;
+    }
+  </script>
+</body>
+</html>

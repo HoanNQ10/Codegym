@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <input type="number" id="a" placeholder="Nhập giá trị a">
+  <input type="number" id="b" placeholder="Nhập giá trị b">
+  <button type="button" onclick="check()">Kiểm tra</button>
+  <p id="result"></p>
+
+</body>
+<script>
+  function check() {
+    const a = parseFloat(document.getElementById("a").value);
+    const b = parseFloat(document.getElementById("b").value);
+
+    if (b === 0){
+      document.getElementById("result").innerHTML = "Không thể chia cho 0"
+     return;
+    }
+
+    if (a % b === 0) {
+      document.getElementById("result").innerHTML = `${a} chia hết cho ${b}`;
+    }else{
+      document.getElementById("result").innerHTML = `${a} không chia hết cho ${b}`;
+    }
+  }
+
+</script>
+</body>
+</html>

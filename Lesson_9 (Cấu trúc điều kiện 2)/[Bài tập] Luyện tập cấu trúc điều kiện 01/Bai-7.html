@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tính hoa hồng</title>
+</head>
+<body>
+<h1>Tính cước điện thoại</h1>
+<input type="number" id="minutes" placeholder="Nhập số phút đã sử dụng"><br><br>
+
+<button type="button" onclick="count()">Tính cước</button>
+<div id="result"></div>
+<script>
+    function count() {
+        const minutes = parseFloat(document.getElementById("minutes").value);
+
+        const fixedFee = 25000; // Phí thuê bao cố định
+        const firstRate = 600;  // 600 đồng mỗi phút cho 50 phút đầu
+        const secondRate = 400; // 400 đồng mỗi phút cho 150 phút tiếp theo
+        const thirdRate = 200;  // 200 đồng mỗi phút cho mọi phút sau 200 phút
+        let totalBill = fixedFee; // Khởi tạo tổng cước với phí thuê bao cố định
+
+        if(isNaN(minutes) || minutes <= 0) {
+            document.getElementById('result').innerHTML = "Vui lòng nhập số phút hợp lệ.";
+            return;
+        }
+
+        if (minutes <= 50 ) {
+            totalBill += minutes * firstRate;
+        } else if (minutes <= 200) {
+            totalBill += minutes * secondRate;
+        } else {
+            totalBill += minutes * thirdRate;
+        }
+        document.getElementById('result').innerHTML = `Tổng cước điện thoại: ${totalBill.toLocaleString()} VNĐ`;
+    }
+
+</script>
+</body>
+</html>

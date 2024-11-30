@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Kiểm tra số nguyên</h1>
+  <input type="number" id="integer" placeholder="Nhập số nguyên">
+  <button type="button" onclick="check()">Check</button>
+  <div id="result"></div>
+
+<script>
+  function check() {
+    const number = parseFloat(document.getElementById("integer").value);
+    if(number < 0) {
+      document.getElementById("result").innerHTML = `${number} < 0`;
+    } else if(number > 0) {
+      document.getElementById("result").innerHTML = `${number} > 0`;
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,25 +1,25 @@
 // khai báo biến
 let firstNumber = null; // Lưu số đầu tiên
-let SetOperator = null;    // Lưu toán tử
+let operator = null;    // Lưu toán tử
 let resetDisplay = false; // Xóa
 
-const view = document.getElementById('view');
+const display = document.getElementById('display');
 
 // Thêm số vào màn hình
-function number() {
+function appendNumber(number) {
     if (resetDisplay) {
-        view.value = number;
+        display.value = number;
         resetDisplay = false;
     } else {
-        view.value = view.value === '0' ? number : view.value + number;
+        display.value = display.value === '0' ? number : display.value + number;
     }
 }
 
 // Thiết lập toán tử
-function operator(op) {
+function setOperator(op) {
     if (firstNumber === null) {
-        firstNumber = parseFloat(view.value);
-        SetOperator = op;
+        firstNumber = parseFloat(display.value);
+        operator = op;
         resetDisplay = true;
     } else {
         alert('Bạn đã chọn toán tử, nhấn "=" hoặc nhập số tiếp theo.');
@@ -29,7 +29,7 @@ function operator(op) {
 // Tính toán kết quả
 function calculate() {
     if (firstNumber !== null && operator !== null) {
-        const secondNumber = parseFloat(view.value);
+        const secondNumber = parseFloat(display.value);
         let result;
         switch (operator) {
             case '+':
@@ -47,7 +47,7 @@ function calculate() {
             default:
                 result = 'Error';
         }
-        view.value = result;
+        display.value = result;
         firstNumber = null;
         operator = null;
     } else {
@@ -56,8 +56,8 @@ function calculate() {
 }
 
 // Xóa màn hình
-function clear() {
-    view.value = '0';
+function clearDisplay() {
+    display.value = '0';
     firstNumber = null;
     operator = null;
     resetDisplay = false;
