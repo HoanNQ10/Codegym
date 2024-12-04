@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Tổng điện năng tiêu thụ (kWh) <input type="number" id="electric">
+<button type="button" onclick="calculate()">Tính</button>
+<div id="result"></div>
+
+<script>
+    function calculate() {
+        let x = parseFloat(document.getElementById("electric").value);
+        let totalCost = 0;
+
+        if (x <= 0) {
+            document.getElementById("result").innerHTML = "Vui lòng nhập số kWh hợp lệ!";
+            return;
+        }
+
+        // Bậc 1
+        if (x <= 50) {
+            totalCost = x * 1893;
+            document.getElementById("result").innerHTML = "Thành tiền: " + totalCost.toFixed(0) + " VND";
+            return;
+        } else {
+            totalCost = 50 * 1893;  // Tính tiền bậc 1
+            x -= 50;
+        }
+
+        // Bậc 2
+        if (x <= 50) {
+            totalCost += x * 1956;
+            document.getElementById("result").innerHTML = "Thành tiền: " + totalCost.toFixed(0) + " VND";
+            return;
+        } else {
+            totalCost += 50 * 1956;  // Tính tiền bậc 2
+            x -= 50;
+        }
+
+        // Bậc 3
+        if (x <= 100) {
+            totalCost += x * 2271;
+            document.getElementById("result").innerHTML = "Thành tiền: " + totalCost.toFixed(0) + " VND";
+            return;
+        } else {
+            totalCost += 100 * 2271;  // Tính tiền bậc 3
+            x -= 100;
+        }
+
+        // Bậc 4
+        if (x <= 100) {
+            totalCost += x * 2860;
+            document.getElementById("result").innerHTML = "Thành tiền: " + totalCost.toFixed(0) + " VND";
+            return;
+        } else {
+            totalCost += 100 * 2860;  // Tính tiền bậc 4
+            x -= 100;
+        }
+
+        // Bậc 5
+        if (x <= 100) {
+            totalCost += x * 3197;
+            document.getElementById("result").innerHTML = "Thành tiền: " + totalCost.toFixed(0) + " VND";
+            return;
+        } else {
+            totalCost += 100 * 3197;  // Tính tiền bậc 5
+            x -= 100;
+        }
+
+        // Bậc 6
+        if (x > 0) {
+            totalCost += x * 3302;  // Tính tiền bậc 6
+        }
+
+        document.getElementById("result").innerHTML = "Thành tiền: " + totalCost.toFixed(0) + " VND";
+    }
+</script>
+</body>
+</html>

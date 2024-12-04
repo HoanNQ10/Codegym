@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  let a = parseFloat(prompt("Nhập chiều dài của hình chữ nhật : ")) // Cạnh của hình vuông
+  let b = parseFloat(prompt("Nhập chiều rộng của hình chữ nhật : ")) // Cạnh của hình vuông
+  if (a >= 0 && b >= 0) { // Kiểm tra cả a và b đều >= 0
+    if (a > 0 && b > 0) { // Kiểm tra cả a và b đều > 0
+      if (a !== b) { // Kiểm tra a khác b
+        let area = a * b;
+        console.log("Diện tích hình chữ nhật là: " + area);
+      } else {
+        console.log("Chiều dài và chiều rộng phải khác nhau (không phải hình vuông).");
+      }
+    } else {
+      console.log("Hình chữ nhật không có diện tích vì một trong hai cạnh bằng 0.");
+    }
+  } else {
+    console.log("Chiều dài và chiều rộng phải là số lớn hơn hoặc bằng 0.");
+  }
+</script>
+</body>
+</html>

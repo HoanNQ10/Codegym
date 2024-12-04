@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <input type="number" id="numberInput" placeholder="độ C">
+    <button type="button" onclick="convert()">Chuyển độ C sang độ F</button>
+    <div id="result"></div>
+<script>
+    function convert() {
+        const celsius = parseFloat(document.getElementById("numberInput").value);
+        const fahrenheit = celsius * 9 / 5 + 32;
+        document.getElementById("result").innerHTML = `${celsius} độ C = ${fahrenheit} độ F`;
+    }
+</script>
+</body>
+</html>

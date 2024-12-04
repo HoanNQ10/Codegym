@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <input type="number" id="numberInput" placeholder="mét">
+  <button type="button" onclick="convert()">Chuyển mét sang feet</button>
+  <div id="result"></div>
+
+  <script>
+    function convert() {
+      const number = parseFloat(document.getElementById('numberInput').value)
+        if(isNaN(number) || number <= 0) {
+          document.getElementById('result').innerHTML = "Vui lòng nhập số chính xác";
+          return;
+        }
+      const feet = number * 3.2808;
+      document.getElementById('result').innerHTML = `ft = ${feet} `
+}
+  </script>
+</body>
+</html>

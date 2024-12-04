@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ứng dụng quản lý</title>
+</head>
+<body>
+<h1>Add New Product</h1>
+
+<!-- Form để thêm sản phẩm mới -->
+<div class="form-container">
+  <input type="text" id="newProductName" placeholder="New Product">
+  <button type="button" onclick="addProduct()">Add</button><br><br>
+</div>
+
+<h1>Display All Product</h1><br><br>
+
+<!-- Bảng hiển thị danh sách sản phẩm -->
+<h3>Product Name</h3>
+<table id="productTable">
+  <thread>
+      <tr>
+        <th>STT</th>
+        <th>Tên sản phầm</th>
+        <th>Hành động</th>
+      </tr>
+  </thread>
+  <tbody>
+  <!-- Danh sách sản phẩm sẽ được hiển thị ở đây -->
+  </tbody>
+</table>
+
+<script>
+  // **Bước 2: Tạo mảng danh sách sản phẩm**
+  let products = [
+    "Sony Xperia",
+    "Samsung Galaxy",
+    "Nokia 6",
+    "Xiaomi Redmi Note 4",
+    "Apple iPhone 6S",
+    "Xiaomi Mi 5s Plus",
+    "Apple iPhone 8 Plus",
+    "Fujitsu F-04E",
+    "Oppo A71"
+  ];
+
+  // **Bước 3: Xây dựng các hàm quản lý sản phẩm**
+
+  // Hàm hiển thị danh sách sản phẩm
+  function displayProducts() {
+    const tableBody = document.getElementById("productTable").getElementsByTagName("tbody")[0];
+    tableBody.innerHTML = ""; // Xóa nội dung cũ
+
+    // Duyệt qua mảng sản phẩm và thêm từng sản phẩm vào bảng
+    products.forEach((product, index) => {
+      const row = tableBody.insertRow(); // Thêm dòng mới
+      const cell1 = row.insertCell(0); // Cột STT
+      const cell2 = row.insertCell(1); // Cột Tên sản phẩm
+      const cell3 = row.insertCell(2); // Cột Hành động
+
+      cell1.textContent = index + 1; // Số thứ tự
+      cell2.textContent = product; // Tên sản phẩm
+      cell3.innerHTML = `
+                    <button class="button" onclick="editProduct(${index})">Edit</button>
+                    <button class="button" onclick="deleteProduct(${index})">Delete</button>
+                `; // Nút sửa và xóa
+    });
+  }
+
+  // Hàm thêm sản phẩm
+  function addProduct() {
+    const productName = document.getElementById("newProductName").value.trim();
+    if (productName) {
+      products.push(productName); // Thêm sản phẩm vào mảng
+      displayProducts(); // Cập nhật danh sách sản phẩm
+      alert("Sản phẩm đã được thêm!");
+      document.getElementById("newProductName").value = ""; // Xóa nội dung trong ô nhập
+    } else {
+      alert("Vui lòng nhập tên sản phẩm!");
+    }
+  }
+
+  // Hàm sửa tên sản phẩm
+  function editProduct(index) {
+    const newName = prompt("Nhập tên mới cho sản phẩm:", products[index]);
+    if (newName && newName.trim() !== "") {
+      products[index] = newName.trim(); // Cập nhật tên sản phẩm
+      displayProducts(); // Cập nhật lại danh sách sản phẩm
+      alert("Sản phẩm đã được sửa!");
+    }
+  }
+
+  // Hàm xóa sản phẩm
+  function deleteProduct(index) {
+    if (confirm("Bạn có chắc muốn xóa sản phẩm này không?")) {
+      products.splice(index, 1); // Xóa sản phẩm khỏi mảng
+      displayProducts(); // Cập nhật danh sách sản phẩm
+      alert("Sản phẩm đã được xóa!");
+    }
+  }
+
+  // **Bước 4: Gọi hàm hiển thị danh sách sản phẩm**
+  window.onload = displayProducts; // Tải trang xong thì hiển thị danh sách
+</script>
+</body>
+</html>

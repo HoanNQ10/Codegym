@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tính diện tích hình vuông</title>
+</head>
+<body>
+
+<script>
+  let a = parseFloat(prompt("Nhập độ dài cạnh của hình vuông: ")) // Cạnh của hình vuông
+  if (a >= 0) {
+    if (a > 0) {
+      let area = a * a;
+      console.log("Diện tích hình vuông là: " + area);
+    } else {
+      console.log("Hình vuông không có diện tích vì cạnh bằng 0.");
+    }
+  } else {
+    console.log("Cạnh hình vuông phải lớn hơn hoặc bằng 0.");
+  }
+</script>
+
+</body>
+</html>

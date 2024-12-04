@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let a = parseFloat(prompt("Nhập giá trị a : "));
+    let b = parseFloat(prompt("Nhập giá trị b : "));
+    let c = parseFloat(prompt("Nhập giá trị c : "));
+
+    // Kiểm tra trường hợp a = 0
+    if (a === 0) {
+        if (b === 0) {
+            alert("Phương trình không có nghiệm vì cả a và b đều bằng 0.");
+        } else {
+            let x = -c / b;
+            alert(`Phương trình là phương trình bậc nhất với nghiệm x = ${x}`);
+        }
+    } else {
+        // Tính delta khi a khác 0
+        let delta = (b * b) - (4 * a * c);
+
+        if (delta > 0 ) {
+            let x1 = (-b + Math.sqrt(delta)) / (2 * a);
+            let x2 = (-b - Math.sqrt(delta)) / (2 * a);
+            alert(`Vì delta > 0 nên phương trình có 2 nghiệm x1 = ${x1} và x2 = ${x2}`);
+        } else if (delta === 0) {
+            let x = (-b / (2 * a));
+            alert(`Vì delta = 0 nên phương trình có nghiệm kép x1 = x2 = ${x}`);
+        } else {
+            alert("Vì delta < 0 nên phương trình vô nghiệm");
+        }
+    }
+</script>
+
+</body>
+</html>

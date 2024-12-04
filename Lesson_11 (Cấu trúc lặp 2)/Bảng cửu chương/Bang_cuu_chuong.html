@@ -5,23 +5,22 @@
     <title>Bảng cửu chương</title>
 </head>
 <body>
-<table border = 1>
+<h1>Bảng cửu chương</h1>
+<div id="table-container"></div>
 
-<tbody id="resultTable">
-
-</tbody>
-</table>
 <script>
-    for (var i = 2; i <= 9; i++) {
-        var row = "<tr>";
-        for ( var j = 1; j <= 9; j++){
-
-            var product = i * j;
-            row += "<td>" + i + " x " + j + " = " + product + "</td>";
+    let sout, i, j;
+    sout = "<table border='1' width='1000' cellspacing='0' cellpadding='3'>";
+    for (i = 1; i < 10; i++) {
+        sout = sout + "<tr>";
+        for (j = 2; j < 10; j++) {
+            sout = sout + "<td>" + j + " x " + i + " = " + (j*i) + "</td>";
 
         }
-        document.getElementById('resultTable').innerHTML += row;
+        sout = sout + "</tr>";
     }
+    sout = sout + "</table>";
+    document.getElementById("table-container").innerHTML = sout;
 </script>
 </body>
 </html>

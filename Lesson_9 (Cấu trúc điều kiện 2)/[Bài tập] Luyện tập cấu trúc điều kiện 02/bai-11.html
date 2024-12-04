@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tính thuế thu nhập cá nhân</title>
+</head>
+<body>
+ <input type = "number" id="income" placeholder="Nhập tổng thu nhập">
+ <button onclick="calculation()">Tính thuế thu nhập</button>
+    <div id="result"></div>
+
+<script>
+    function calculation(){
+        let income = parseFloat(document.getElementById("income").value);
+        let totalTax = 0;
+
+
+        if (income <=0) {
+            document.getElementById("result").innerHTML = "Vui lòng nhập giá trị lớn hơn 0"
+            return;
+        }
+
+        //  Tính thuế bậc 1
+        if (income <= 5000000) {
+            totalTax = income * 0.05;
+            document.getElementById("result").innerHTML =`Thuế thu nhập là : ${totalTax}`;
+        } else {
+            totalTax += 5000000 * 0.05;
+            income -= 5000000;
+        }
+
+        // Tính thuế bậc 2
+        if (income <= 10000000) {
+            totalTax += income * 0.1;
+            document.getElementById("result").innerHTML =`Thuế thu nhập là : ${totalTax}`;
+        } else {
+            totalTax += 10000000 * 0.1;
+            income -= 10000000;
+        }
+
+        if (income <= 18000000) {
+            totalTax = income * 0.15 - 750000;
+            document.getElementById("result").innerHTML =`Thuế thu nhập là : ${totalTax}`;
+        } else {
+            totalTax = 180000000 * 0.15 - 750000;
+            income -= 18000000;
+        }
+
+    }
+
+</script>
+</body>
+</html>

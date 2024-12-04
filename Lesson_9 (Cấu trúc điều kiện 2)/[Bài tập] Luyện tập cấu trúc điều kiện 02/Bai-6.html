@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <script>
+    let a = parseFloat(prompt("Nhập giá trị a : "));
+    let b = parseFloat(prompt("Nhập giá trị b : "));
+
+    if (a === 0) {
+      if (b === 0) {
+        alert("Đây là phương trình vô số nghiệm.");
+      } else {
+        alert("Đây là phương trình vô nghiệm")
+      }
+    } else {
+      let x  = -b / a;
+      alert(`Phương trình có một nghiệm duy nhất x = ${x}`);
+    }
+  </script>
+</body>
+</html>
