@@ -6,13 +6,17 @@
 </head>
 <body>
 <script>
+    // Hiển thị hộp thoại yêu cầu người dùng nhập dữ liệu
     let number = parseFloat(prompt("Nhập số nguyên tố đầu tiên: "));
+    // Biến đếm số lượng số nguyên tố đã tìm được (ban đầu là 0)
     let count = 0;
+    // Biến dùng để kiểm tra các số từ 2 trở đi (Vì 2 là số nguyên tố nhỏ nhất)
     let N = 2;
 
+    // Vòng lặp chạy cho đến khi tìm được đủ số lượng nguyên tố cần yêu cầu
      while (count < number) {
          if (isPrime(N)) {
-             document.write("N");
+             document.write(N + "<br>");
              count++;
          }
          N++;
@@ -20,7 +24,7 @@
 
     function isPrime(num) {
         if (num < 2) {
-            document.write (`${num} không phải là số nguyên tố`)
+            document.write(`${num} không phải là số nguyên tố`)
         }
         for (let i = 2; i <= Math.sqrt(num); i++) {
             if (num % i === 0) return false;
