@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game đoán số</title>
+</head>
+<body>
+<button onclick="play()">Chơi</button>
+<script>
+    function play() {
+        let number = parseFloat(prompt("Số bạn muốn đoán trong khoảng lớn nhất là bao nhiêu?"));
+        let randomNumber = Math.floor(Math.random() * number);
+        let n = 3 // số lần chơi
+        let count = 0;
+
+        while (count < n) {
+            let numberCheck = parseFloat(prompt("Nhập số bạn đoán"));
+            count++;
+
+            if (numberCheck === randomNumber) {
+                alert("Chúc mừng bạn đã đoán đúng");
+                break;
+            } else if (numberCheck < randomNumber) {
+                alert("Số bạn đoán bé hơn");
+            } else {
+                alert("Số bạn đoán lớn hơn");
+            }
+        }
+        if (count === n) {
+            alert(`Bạn đã hết lượt chơi. Số đúng là ${randomNumber}`);// in ra số đoán của máy tính
+        }
+    }
+
+</script>
+</body>
+</html>

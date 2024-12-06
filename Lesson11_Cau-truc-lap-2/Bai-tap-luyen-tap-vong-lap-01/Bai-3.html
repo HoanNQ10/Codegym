@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hiển thị 20 số trong dãy fibonacci chia hết cho 5</title>
+</head>
+<body>
+<script>
+  // số lượng fibonacci cần hiển thị
+  let n = 20;
+  // khởi tạo 2 số đầu tiên
+  let fib = [0,1];
+
+  for (let i = 2; i <= n; i++) {
+    // tính số fibonacci tiếp theo
+    fib[i] = fib[i - 1] + fib[i - 2];
+  }
+
+  // hiển thị kết quả
+  document.write("Dãy Fibonacci đầu tiên là : <br>");
+  for (let i = 0; i < n; i++) {
+    document.write(fib[i] + "<br>");
+  }
+</script>
+</body>
+</html>
