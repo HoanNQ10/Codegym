@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>in hình chữ nhật</title>
+</head>
+<body>
+<script>
+  let rows = 5; // số hàng
+  let cols = 30; // số cột
+
+  for (let i = 1; i <= rows; i++) { // vòng lặp qua từng hàng
+    let line = "";
+
+    for (let j = 1; j <= cols; j++) {
+      if (i === 1 || i === rows || j === 1 || j === cols) {
+        line += "*";
+      } else {
+        line += " ";
+      }
+    }
+    document.write(line +"<br>");
+  }
+
+</script>
+</body>
+</html>

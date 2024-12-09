@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>In hình trái tim</title>
+</head>
+<body>
+<script>
+  let rows = 7; // số dòng để vẽ hình trái tim
+  let cols = 9; // số cột để vẽ hình trái tim
+  let i,j;
+
+  for (i = 1; i <= rows; i++) {
+    for (j = 1; j <= cols; j++) {
+      if ((i === 1 && (j === 1 || j === 4 || j === 5 || j === 6 || j === 9))
+       || (i === 2 &&(j === 5))
+       || (i === 4 && (j === 1 || j === 9))
+       || (i === 5 && (j <= 2 || j >= 8))
+       || (i === 6 && (j <= 3 || j >= 7))
+       || (i === 7 && (j <= 4 || j >= 6))) {
+        document.write("&nbsp;&nbsp");
+      } else {
+        document.write("*");
+      }
+    }
+    document.write("<br>");
+  }
+
+</script>
+</body>
+</html>

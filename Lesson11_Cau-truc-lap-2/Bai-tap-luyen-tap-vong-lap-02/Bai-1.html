@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>In dãy Fibonaci</title>
+</head>
+<body>
+<script>
+  let fib = [0,1];
+
+  document.write(fib[0] + "<br>");
+  document.write(fib[1] + "<br>");
+
+  for (let i = 2; i < 100; i++) {
+    fib[i] = fib[i - 1] + fib[i - 2];
+    document.write(fib[i] + "<br>");
+  }
+
+</script>
+</body>
+</html>
