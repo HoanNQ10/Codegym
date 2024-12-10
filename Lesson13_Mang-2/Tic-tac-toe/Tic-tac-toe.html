@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Caro game</h1>
+<p id="carogame"></p>
+<input type="button" value="Change Value" onclick="changeValue()">
+
+<script>
+  let b = document.getElementById("carogame");
+  let board = [];
+  let h = 1; // Biến để đếm lượt chơi (X hoặc O)
+
+  // Tạo bảng 5x5 ban đầu
+  for (let i = 0; i < 5; i++) {
+    board[i] = new Array('(.)', '(.)', '(.)', '(.)', '(.)');
+  }
+
+  // Hàm hiển thị bảng caro
+  function displayBoard() {
+    let data = '';
+    for (let i = 0; i < 5; i++) {
+      for (let j = 0; j < 5; j++) {
+        data += board[i][j] + '&ensp;&ensp;';
+      }
+      data += '<br/>';
+    }
+    b.innerHTML = data;
+  }
+
+  displayBoard();
+
+  function changeValue() {
+    let positionX = parseInt(prompt("Nhập vị trí X (0-4): "));
+    let positionY = parseInt(prompt("Nhập vị trí Y (0-4): "));
+
+    // Kiểm tra nhập hợp lệ
+    if (
+            positionX < 0 || positionX >= 5 ||
+            positionY < 0 || positionY >= 5 ||
+            board[positionX][positionY] !== '(.)'
+    ) {
+      alert("Vị trí không hợp lệ, vui lòng thử lại.");
+      return;
+    }
+
+    // Gán giá trị X hoặc O dựa trên lượt chơi
+    if (h % 2 === 0) {
+      board[positionX][positionY] = 'X';
+    } else {
+      board[positionX][positionY] = 'O';
+    }
+    h++;
+
+    // Hiển thị lại bảng sau mỗi lượt chơi
+    displayBoard();
+
+    // Kiểm tra điều kiện thắng
+    checkWinner();
+  }
+
+  function checkWinner() {
+    // Kiểm tra theo hàng, cột và đường chéo
+    for (let i = 0; i < 5; i++) {
+      for (let j = 0; j < 5; j++) {
+        // Kiểm tra 3 ô liên tiếp theo hàng
+        if (j <= 2 && board[i][j] === board[i][j + 1] && board[i][j + 1] === board[i][j + 2] && board[i][j] !== '(.)') {
+          alert(`${board[i][j]} thắng`);
+          return;
+        }
+        // Kiểm tra 3 ô liên tiếp theo cột
+        if (i <= 2 && board[i][j] === board[i + 1][j] && board[i + 1][j] === board[i + 2][j] && board[i][j] !== '(.)') {
+          alert(`${board[i][j]} thắng`);
+          return;
+        }
+        // Kiểm tra 3 ô liên tiếp theo đường chéo chính
+        if (i <= 2 && j <= 2 && board[i][j] === board[i + 1][j + 1] && board[i + 1][j + 1] === board[i + 2][j + 2] && board[i][j] !== '(.)') {
+          alert(`${board[i][j]} thắng`);
+          return;
+        }
+        // Kiểm tra 3 ô liên tiếp theo đường chéo phụ
+        if (i <= 2 && j >= 2 && board[i][j] === board[i + 1][j - 1] && board[i + 1][j - 1] === board[i + 2][j - 2] && board[i][j] !== '(.)') {
+          alert(`${board[i][j]} thắng`);
+          return;
+        }
+      }
+    }
+  }
+</script>
+</body>
+</html>
