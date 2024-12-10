@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Từ điển</title>
+</head>
+<body>
+Nhập từ: <input type="text" id="fill">
+<button onclick = "translate1()">Dịch</button>
+<div id ="result"></div>
+
+<script>
+    function translate1() {
+        const input = document.getElementById("fill").value;
+        const english = ["apple", "banana", "grape"];
+        const vietnamese = ["táo", "chuối", "nho"];
+
+        // Tìm vị trí của từ nhập vào trong mảng English
+        const index = english.indexOf(input);
+
+        // Kiểm tra nếu tìm thấy từ trong mảng English
+        if (index !== -1) {
+            document.getElementById("result").innerHTML = vietnamese[index];
+        } else {
+            document.getElementById("result").innerHTML = "Không tìm thấy từ này trong từ điển!";
+        }
+    }
+</script>
+</body>
+</html>
