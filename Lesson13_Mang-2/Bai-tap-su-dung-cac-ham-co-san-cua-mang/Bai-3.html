@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<input type="text" id="textInput" placeholder="Enter text here"/>
+<button onclick="convertCase()">Result</button>
+<div id="result"></div>
+
+<script>
+  var UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var LOWER = 'abcdefghijklmnopqrstuvwxyz';
+
+  function convertCase() {
+    var input = document.getElementById("textInput");
+    var output = document.getElementById("result");
+
+    var result = [];
+    var str = input.value;
+
+    for (var x = 0; x < str.length; x++) {
+      if (UPPER.indexOf(str[x]) !== -1) {
+        result.push(str[x].toLowerCase());
+      } else if (LOWER.indexOf(str[x]) !== -1) {
+        result.push(str[x].toUpperCase());
+      } else {
+        result.push(str[x]);
+      }
+    }
+    output.textContent = result.join('');
+  }
+</script>
+</body>
+</html>

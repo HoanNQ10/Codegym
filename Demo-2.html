@@ -6,16 +6,13 @@
 </head>
 <body>
 <script>
-    let numbers = 0;
-    let count = 0;
-    let total = 0;
+    var x = 0;
 
-    while (count < n) {
-        if (numbers % 3 === 0 && numbers % 5 !== 0) {
-            total += numbers;
-            count++;
-        }
-        numbers++;
+    for (var i=1; i<4; i++)
+    {
+        x = x + i;
+        console.log(x);
+        console.log(i);
     }
 </script>
 </body>
