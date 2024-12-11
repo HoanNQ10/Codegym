@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ứng dụng vui Faking Textarea on Typing</title>
+</head>
+<body>
+<h2>Type anthing slowly</h2>
+<label>
+    <textarea name="txt" cols="40" rows="10" onkeydown="typeTextarea();"></textarea>
+</label>
+<script>
+    let n = ""; // chuỗi kết quả
+    let a = [
+        "T",
+        "Ô",
+        "I",
+        " ",
+        "L",
+        "À",
+        " ",
+        "M",
+        "Ộ",
+        "T",
+        " ",
+        "Đ",
+        "Ứ",
+        "A",
+        " ",
+        "N",
+        "G",
+        "Ố",
+        "C",
+        "!",
+        "!"
+    ];
+
+    let index = "0"; // vị trí hiện tại trong mảng
+    function typeTextarea(){
+        if(index < a.length) {
+            n += a[index];
+            index++;
+
+        }
+        // Hiển thị kết quả trong textarea
+        document.querySelector('textarea').value = n;
+
+        // Ngăn nhập thêm ký tự
+        event.preventDefault();
+    }
+
+</script>
+
+</body>
+</html>
