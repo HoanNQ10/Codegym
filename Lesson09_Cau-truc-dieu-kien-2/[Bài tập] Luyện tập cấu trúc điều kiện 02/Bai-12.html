@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>chương trình tính lãi ngân hàng</title>
+</head>
+<body>
+<script>
+  // Nhập số tiền ban đầu, số tháng và lãi suất hàng tháng
+  let principal = parseFloat(prompt("Nhập số tiền ban đầu: "));
+  let months = parseInt(prompt("Nhập số tháng cho vay: "));
+  let interestRate = parseFloat(prompt("Nhập lãi suất hàng tháng (%): "));
+
+  // Tính lãi kép
+  let amount = principal;
+  for (let i = 0; i < months; i++) {
+    amount += amount * (interestRate / 100); // Tính lãi hàng tháng
+  }
+
+  // Hiển thị kết quả
+  console.log("Số tiền sau khi tính lãi: " + amount.toFixed(2));
+</script>
+</body>
+</html>
