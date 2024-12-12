@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  let a =['c','o','d','e','g','y','m','1','2','3'];
+  let count = 0;
+
+  for (let char of a) {
+    if (!isNaN(char) && char.trim() !== '') {
+      count++;
+    }
+  }
+
+  console.log("Mảng ký tự:", a);
+  console.log("Số ký tự số trong mảng:", count);
+
+</script>
+</body>
+</html>

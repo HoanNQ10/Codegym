@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  let a = "Đây là một chuỗi ví dụ";
+  let count = 0;
+  let inWord = false; // Biến để theo dõi xem có trong 1 từ hay không
+
+  for (let i = 0; i < a.length; i++) {
+    let char = a[i];
+
+    //kiểm tra nếu ký tự là mảng trắng
+    if (char === " ") {
+      inWord = false; // Ra khỏi từ
+    } else {
+      // Nếu gặp 1 ký tự không phải khoảng trắng và chưa có từ
+    if (!inWord){
+      count++;
+      inWord = true; // Đang trong 1 từ
+    }
+    }
+  }
+  console.log("Số từ trong chuỗi:", count);
+
+</script>
+</body>
+</html>
