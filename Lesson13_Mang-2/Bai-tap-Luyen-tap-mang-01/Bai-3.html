@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  let number = [16, 8, 79, 12, 3, 57, 23, 45, 4, 22];
+  let maxValue = [0];
+
+  // Tìm giá trị lớn nhất trong mảng
+  for ( let i = 0; i <number.length; i++ ) {
+    if ( number[i] > maxValue) {
+      maxValue = number[i];
+    }
+  }
+
+  // Tính giá trị trung bình của các phần tử trong mảng
+  let sum = 0;
+  for ( let i = 0; i < number.length; i++ ) {
+    sum += number[i];
+  }
+
+  let average = sum / number.length;
+
+  // In kết quả
+  document.write(`Giá trị lớn nhất trong mảng là: ${maxValue}`+ "<br>");
+  document.write(`Giá trị trung bình của các phần tử trong mảng là: ${average}`);
+
+</script>
+</body>
+</html>

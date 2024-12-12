@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>Nhập số nguyên vào mảng: </p>
+<input type="text" id="soNguyen" placeholder="Nhập giá trị">
+<button type="button" onclick="check()">Kiểm tra</button>
+<div id="result"></div>
+<div id="result2"></div>
+
+<script>
+  function check() {
+    let number = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    let soNguyen = parseInt(document.getElementById("soNguyen").value);
+
+    if (number.includes(soNguyen)) {
+      number = number.filter(num => num !== soNguyen);
+      document.getElementById("result").innerHTML = "V is in the array"
+      document.getElementById("result2").innerHTML = "Mảng sau khi xoá: " + number.join(", ");
+    } else {
+      document.getElementById("result").innerHTML = "V is not in the array"
+    }
+  }
+
+</script>
+</body>
+</html>
