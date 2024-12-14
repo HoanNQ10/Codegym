@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  let a = ["Polaris", "Aldebaran", "Deneb", "Vega", "Altair", "Dubhe", "Regulus"];
+  let b = ["Ursa Minor", "Taurus", "Cygnus", "Lyra", "Aquila", "Ursa Major", "Leo"];
+
+
+  function check(){
+    let name = prompt("Nhập tên ngôi sao: ");
+    for (let i = 0; i < a.length; i++) {
+      if(name === a[i]) {
+        document.write(b[i]);
+        return;
+      }
+    }
+    document.write("Không tìm thấy ngôi sao");
+  }
+  check([a],[b]);
+
+</script>
+</body>
+</html>

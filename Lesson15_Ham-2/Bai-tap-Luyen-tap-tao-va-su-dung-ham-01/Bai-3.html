@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <input type="number" id="param1" placeholder="Nhập tham số 1">
+  <input type="number" id="param2" placeholder="Nhập tham số 2">
+  <button onclick="checkParameters()">Kiểm tra và tính tổng</button>
+  <div id="result"></div>
+<script>
+  function checkParameters() {
+    let param1 = parseInt(document.getElementById("param1").value);
+    let param2 = parseInt(document.getElementById("param2").value);
+
+    if (param1 > param2) {
+      alert("Tham số thứ nhất lớn hơn tham số thứ hai");
+    } else {
+      let sum = param1 + param2;
+    document.getElementById("result").innerText = "Tổng của hai tham số là: " + sum;
+    }
+  }
+</script>
+</body>
+</html>

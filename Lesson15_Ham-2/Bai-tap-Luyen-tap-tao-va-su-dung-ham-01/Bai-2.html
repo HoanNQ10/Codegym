@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="number" id="argument">
+<button onclick="show()">Nhấn để hiển thị kết quả</button>
+<div id="returnValue"></div>
+
+<script>
+  function show() {
+    let argument = parseInt(document.getElementById("argument").value);
+    argument++;
+    document.getElementById("returnValue").innerHTML = "Kết quả: " + argument;
+  }
+
+</script>
+</body>
+</html>
