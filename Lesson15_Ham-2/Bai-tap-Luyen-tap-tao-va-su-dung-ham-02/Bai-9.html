@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function character(a, b) {
+       let count = 0;
+       for (let i = 0; i < a.length; i++) {
+           if (a[i] === b) {
+               count++;
+           }
+       }
+       if (count > 0) {
+           return count;
+       } else {
+           return -1;
+       }
+    }
+    let text1 = ['l','o','v','e','c','o','d','e','g','y','m','f','o','r','e','v','e','r'];
+    // console.log(text1);
+    let text2 = prompt("Nhập một ký tự bất kỳ: ");
+    let result = character(text1, text2);
+
+    if (result !== -1) {
+        alert("Số lần xuất hiện của ký tự '" + text2 + "' là: " + result);
+    } else {
+        alert("Ký tự '" + text2 + "' không có trong mảng.");
+    }
+
+</script>
+</body>
+</html>

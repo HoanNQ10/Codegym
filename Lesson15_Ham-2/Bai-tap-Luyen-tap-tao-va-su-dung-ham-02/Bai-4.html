@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <script>
+    function isDigit(char) {
+      // Kiểm tra nếu char là một ký tự số (0-9)
+      return char >= '0' && char <= '9';
+    }
+
+    // Sử dụng hàm
+    let inputChar = prompt("Nhập một ký tự:");
+    if (isDigit(inputChar)) {
+      alert(`${inputChar} là ký tự số.`);
+    } else {
+      alert(`${inputChar} không phải là ký tự số.`);
+    }
+  </script>
+</body>
+</html>

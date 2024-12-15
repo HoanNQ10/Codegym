@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <input type="number" id="inputNumber" placeholder="Nhập số nguyên">
+    <button onclick="calculateFactorial()">Tính giai thừa</button>
+    <div id="result"></div>
+
+<script>
+    function calculateFactorial() {
+        let integer = parseInt(document.getElementById('inputNumber').value);
+
+        if (!Number.isInteger(integer) || integer < 0) {
+            document.getElementById('result').innerHTML = "Vui lòng nhập số nguyên.";
+            return;
+        }
+
+        let result = 1;
+        for (let i = 1; i <= integer ; i++) {
+            result *= i;
+        }
+        document.getElementById('result').innerHTML = "Giai thừa của " + integer + " là: " + result;
+    }
+</script>
+</body>
+</html>

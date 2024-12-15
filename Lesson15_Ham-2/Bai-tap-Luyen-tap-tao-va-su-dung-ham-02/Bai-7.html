@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  function integer(a, b) {
+    if (a > 0 && b > 0) {
+      alert (b + "," + a);
+    } else if (a <= 0 && b > 0) {
+      alert (a + " không phải là số nguyên dương")
+    } else if (a > 0 && b <= 0) {
+        alert (b + " không phải là số nguyên dương")
+    } else {
+        alert (a + "và" + b + " không phải là số nguyên dương")
+    }
+  }
+
+  let num1 = parseInt(prompt('Nhập số nguyên thứ 1: '));
+  let num2 = parseInt(prompt('Nhập số nguyên thứ 2: '));
+  integer(num1, num2);
+</script>
+</body>
+</html>

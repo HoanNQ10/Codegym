@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tính diện tích, chu vi hình tròn</title>
+</head>
+<body>
+<input type="number" id="inputNumber" placeholder="Nhập bán kính hình tròn">
+<button onclick="calculateArea()">Tính diện tích</button>
+<button onclick="calculateCircumference()">Tính chu vi</button>
+<div id="result"></div>
+
+<script>
+  function calculateArea() {
+    let number = parseFloat(document.getElementById('inputNumber').value);
+    let area = Math.PI * number * number;
+    document.getElementById('result').innerHTML = 'Diện tích hình tròn: ' + area.toFixed(2);
+  }
+
+  function calculateCircumference() {
+    let number = parseFloat(document.getElementById('inputNumber').value);
+    let circumference = 2 * Math.PI * number;
+    document.getElementById('result').innerHTML = 'Chu vi hình tròn: ' + circumference.toFixed(2);
+  }
+</script>
+</body>
+</html>
