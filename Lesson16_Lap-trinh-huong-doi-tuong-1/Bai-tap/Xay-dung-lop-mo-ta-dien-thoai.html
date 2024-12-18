@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ứng dụng Mobile</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .button {
+      padding: 10px 20px;
+      margin: 5px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    .button:disabled {
+      background-color: #ccc;
+    }
+    .output {
+      margin-top: 20px;
+      font-size: 16px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    .status {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Ứng dụng Mobile</h1>
+
+<div>
+  <button class="button" id="turnOnNokia">Bật Nokia</button>
+  <button class="button" id="turnOffNokia" disabled>Tắt Nokia</button>
+  <button class="button" id="turnOnIphone">Bật iPhone</button>
+  <button class="button" id="turnOffIphone" disabled>Tắt iPhone</button>
+  <button class="button" id="composeMessageNokia" disabled>Soạn tin từ Nokia</button>
+  <button class="button" id="sendMessage" disabled>Gửi tin từ Nokia</button>
+  <button class="button" id="viewSentMessagesNokia" disabled>Xem tin đã gửi (Nokia)</button>
+  <button class="button" id="viewInboxIphone" disabled>Xem hộp thư đến (iPhone)</button>
+  <button class="button" id="chargeNokia" disabled>Xạc Nokia</button>
+  <button class="button" id="chargeIphone" disabled>Xạc iPhone</button>
+</div>
+
+<div class="output" id="output"></div>
+
+<div class="status">
+  <p><strong>Trạng thái pin Nokia: <span id="nokiaBattery">100</span>%</strong></p>
+  <p><strong>Trạng thái pin iPhone: <span id="iphoneBattery">100</span>%</strong></p>
+</div>
+
+<script>
+  class Mobile {
+    constructor(name) {
+      this.name = name;
+      this.battery = 100;
+      this.isOn = false;
+      this.draftMessage = '';
+      this.inbox = [];
+      this.sentMessages = [];
+    }
+
+    checkStatus() {
+      return this.isOn ? `${this.name} đang bật` : `${this.name} đang tắt`;
+    }
+
+    turnOn() {
+      if (this.battery > 0) {
+        this.isOn = true;
+        return `${this.name} đã bật.`;
+      } else {
+        return `${this.name} không thể bật vì hết pin.`;
+      }
+    }
+
+    turnOff() {
+      this.isOn = false;
+      return `${this.name} đã tắt.`;
+    }
+
+    charge() {
+      if (this.battery < 100) {
+        this.battery = 100;
+        return `${this.name} đã được xạc đầy pin.`;
+      } else {
+        return `${this.name} đã có đầy đủ pin.`;
+      }
+    }
+
+    composeMessage(message) {
+      if (this.isOn && this.battery > 0) {
+        this.draftMessage = message;
+        this.battery--;
+        return `${this.name} đang soạn tin nhắn: ${message}`;
+      } else if (!this.isOn) {
+        return `${this.name} không thể soạn tin nhắn vì điện thoại đang tắt.`;
+      } else {
+        return `${this.name} không thể soạn tin nhắn vì hết pin.`;
+      }
+    }
+
+    receiveMessage(from, message) {
+      if (this.isOn && this.battery > 0) {
+        this.inbox.push({ from, message });
+        this.battery--;
+        return `${this.name} nhận được tin nhắn từ ${from.name}: ${message}`;
+      } else if (!this.isOn) {
+        return `${this.name} không thể nhận tin nhắn vì điện thoại đang tắt.`;
+      } else {
+        return `${this.name} không thể nhận tin nhắn vì hết pin.`;
+      }
+    }
+
+    sendMessage(to, message) {
+      if (this.isOn && this.battery > 0) {
+        to.receiveMessage(this, message);
+        this.sentMessages.push({ to: to.name, message });
+        this.draftMessage = '';
+        this.battery--;
+        return `${this.name} gửi tin nhắn tới ${to.name}: ${message}`;
+      } else if (!this.isOn) {
+        return `${this.name} không thể gửi tin nhắn vì điện thoại đang tắt.`;
+      } else {
+        return `${this.name} không thể gửi tin nhắn vì hết pin.`;
+      }
+    }
+
+    viewInbox() {
+      if (this.isOn && this.battery > 0) {
+        if (this.inbox.length === 0) {
+          return `${this.name} không có tin nhắn trong hộp thư đến.`;
+        } else {
+          return `${this.name} xem hộp thư đến: ${this.inbox.map(msg => `${msg.from.name}: ${msg.message}`).join('\n')}`;
+        }
+      } else if (!this.isOn) {
+        return `${this.name} không thể xem tin nhắn vì điện thoại đang tắt.`;
+      } else {
+        return `${this.name} không thể xem tin nhắn vì hết pin.`;
+      }
+    }
+
+    viewSentMessages() {
+      if (this.isOn && this.battery > 0) {
+        if (this.sentMessages.length === 0) {
+          return `${this.name} chưa gửi tin nhắn nào.`;
+        } else {
+          return `${this.name} xem tin nhắn đã gửi: ${this.sentMessages.map(msg => `${msg.to}: ${msg.message}`).join('\n')}`;
+        }
+      } else if (!this.isOn) {
+        return `${this.name} không thể xem tin nhắn đã gửi vì điện thoại đang tắt.`;
+      } else {
+        return `${this.name} không thể xem tin nhắn đã gửi vì hết pin.`;
+      }
+    }
+
+    updateBatteryDisplay() {
+      const batteryDisplay = this.name === 'Nokia' ? document.getElementById('nokiaBattery') : document.getElementById('iphoneBattery');
+      batteryDisplay.textContent = this.battery;
+    }
+  }
+
+  const nokia = new Mobile('Nokia');
+  const iphone = new Mobile('iPhone');
+
+  const output = document.getElementById('output');
+  const turnOnNokiaButton = document.getElementById('turnOnNokia');
+  const turnOffNokiaButton = document.getElementById('turnOffNokia');
+  const turnOnIphoneButton = document.getElementById('turnOnIphone');
+  const turnOffIphoneButton = document.getElementById('turnOffIphone');
+  const composeMessageNokiaButton = document.getElementById('composeMessageNokia');
+  const sendMessageButton = document.getElementById('sendMessage');
+  const viewSentMessagesNokiaButton = document.getElementById('viewSentMessagesNokia');
+  const viewInboxIphoneButton = document.getElementById('viewInboxIphone');
+  const chargeNokiaButton = document.getElementById('chargeNokia');
+  const chargeIphoneButton = document.getElementById('chargeIphone');
+
+  function updateOutput(message) {
+    output.textContent = message;
+  }
+
+  turnOnNokiaButton.addEventListener('click', () => {
+    updateOutput(nokia.turnOn());
+    nokia.updateBatteryDisplay();
+    turnOnNokiaButton.disabled = true;
+    turnOffNokiaButton.disabled = false;
+    composeMessageNokiaButton.disabled = false;
+    chargeNokiaButton.disabled = false;
+    viewSentMessagesNokiaButton.disabled = false;
+  });
+
+  turnOffNokiaButton.addEventListener('click', () => {
+    updateOutput(nokia.turnOff());
+    turnOnNokiaButton.disabled = false;
+    turnOffNokiaButton.disabled = true;
+    composeMessageNokiaButton.disabled = true;
+    chargeNokiaButton.disabled = true;
+    viewSentMessagesNokiaButton.disabled = true;
+    sendMessageButton.disabled = true;
+  });
+
+  turnOnIphoneButton.addEventListener('click', () => {
+    updateOutput(iphone.turnOn());
+    iphone.updateBatteryDisplay();
+    turnOnIphoneButton.disabled = true;
+    turnOffIphoneButton.disabled = false;
+    viewInboxIphoneButton.disabled = false;
+    chargeIphoneButton.disabled = false;
+  });
+
+  turnOffIphoneButton.addEventListener('click', () => {
+    updateOutput(iphone.turnOff());
+    turnOnIphoneButton.disabled = false;
+    turnOffIphoneButton.disabled = true;
+    viewInboxIphoneButton.disabled = true;
+    chargeIphoneButton.disabled = true;
+  });
+
+  composeMessageNokiaButton.addEventListener('click', () => {
+    updateOutput(nokia.composeMessage('Chào iPhone!'));
+    nokia.updateBatteryDisplay();
+    sendMessageButton.disabled = false;
+  });
+
+  sendMessageButton.addEventListener('click', () => {
+    updateOutput(nokia.sendMessage(iphone, nokia.draftMessage));
+    nokia.updateBatteryDisplay();
+    iphone.updateBatteryDisplay();
+  });
+
+  viewSentMessagesNokiaButton.addEventListener('click', () => {
+    updateOutput(nokia.viewSentMessages());
+    nokia.updateBatteryDisplay();
+  });
+
+  viewInboxIphoneButton.addEventListener('click', () => {
+    updateOutput(iphone.viewInbox());
+    iphone.updateBatteryDisplay();
+  });
+
+  chargeNokiaButton.addEventListener('click', () => {
+    updateOutput(nokia.charge());
+    nokia.updateBatteryDisplay();
+  });
+
+  chargeIphoneButton.addEventListener('click', () => {
+    updateOutput(iphone.charge());
+    iphone.updateBatteryDisplay();
+  });
+</script>
+
+</body>
+</html>
