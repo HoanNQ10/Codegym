@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Xây dựng lớp mô tả Temperature</title>
+</head>
+<body>
+    <h1>Temperature Conversion</h1>
+  <p>Độ C: <span id="celsius"></span></p>
+  <p>Độ F: <span id="fahrenheit"></span></p>
+  <p>Độ Kelvin: <span id="kelvin"></span></p>
+  <script>
+    // Tạo lớp Temperature
+    class Temperature {
+
+      constructor(celsius, fahrenheit, kelvin) {
+        if (celsius < -273) {
+          throw new Error("Nhiệt độ không thể nhỏ hơn -273 độ C");
+        }
+        this.celsius = celsius;
+      }
+      // Phương thức chuyển đổi từ độ C sang độ F
+      toFahrenheit() {
+        return (this.celsius * 9/5) + 32;
+      }
+
+      // Phương thức chuyển đổi từ độ C sang Kelvin
+      toKelvin() {
+        return this.celsius + 273.15;
+      }
+    }
+
+    // Khởi tạo đối tượng Temperature với giá trị 25 độ C
+    const temp = new Temperature(25);
+
+    // Hiển thị các giá trị nhiệt độ
+    document.getElementById("celsius").textContent = temp.celsius + " °C";
+    document.getElementById("fahrenheit").textContent = temp.toFahrenheit() + " °F";
+    document.getElementById("kelvin").textContent = temp.toKelvin() + " K";
+  </script>
+</body>
+</html>
