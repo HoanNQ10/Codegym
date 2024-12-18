@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Memory Game</h1>
+<div id="game-container"></div>
+<script>
+  // Lấy container trò chơi
+  const gameContainer = document.getElementById("game-container");
+
+  // Tạo danh sách các giá trị thẻ
+  const cardValues = ["🍎", "🍌", "🍇", "🍓", "🍒", "🥝", "🍍", "🍉"];
+  const cards = cardValues.concat(cardValues); // Tạo 8 cặp (16 thẻ)
+
+  // Trộn ngẫu nhiên các thẻ
+  cards.sort(() => Math.random() - 0.5);
+
+  // Biến trạng thái
+  let firstCard = null;
+  let secondCard = null;
+  let lockBoard = false;
+
+  // Hàm khởi tạo thẻ
+  function createCards() {
+    cards.forEach((value, index) => {
+      const card = document.createElement("button");
+      card.textContent = "?"; // Hiển thị dấu hỏi khi thẻ chưa lật
+      card.dataset.value = value; // Lưu giá trị của thẻ
+      card.dataset.index = index; // Đánh số thứ tự thẻ
+      card.addEventListener("click", () => flipCard(card)); // Thêm sự kiện click
+      gameContainer.appendChild(card); // Thêm thẻ vào container
+    });
+  }
+
+  // Hàm lật thẻ
+  function flipCard(card) {
+    if (lockBoard || card === firstCard || card.textContent !== "?") return;
+
+    card.textContent = card.dataset.value; // Hiển thị giá trị thẻ
+    if (!firstCard) {
+      firstCard = card; // Lưu thẻ đầu tiên
+    } else {
+      secondCard = card; // Lưu thẻ thứ hai
+      checkMatch(); // Kiểm tra cặp thẻ
+    }
+  }
+
+  // Hàm kiểm tra thẻ trùng khớp
+  function checkMatch() {
+    lockBoard = true;
+    if (firstCard.dataset.value === secondCard.dataset.value) {
+      // Nếu khớp, giữ nguyên giá trị
+      resetTurn();
+    } else {
+      // Nếu không khớp, ẩn giá trị sau 1 giây
+      setTimeout(() => {
+        firstCard.textContent = "?";
+        secondCard.textContent = "?";
+        resetTurn();
+      }, 1000);
+    }
+  }
+
+  // Hàm đặt lại trạng thái sau khi kiểm tra
+  function resetTurn() {
+    firstCard = null;
+    secondCard = null;
+    lockBoard = false;
+  }
+
+  // Khởi tạo trò chơi
+  createCards();
+</script>
+</body>
+</html>
