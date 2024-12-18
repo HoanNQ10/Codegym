@@ -1,50 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 2.5em;
+      color: #4c77af;
+    }
+
+    #game-container {
+      display: grid;
+      grid-template-columns: repeat(4, 100px);
+      grid-gap: 10px;
+      justify-content: center;
+      margin: 20px auto;
+      max-width: 500px;
+      display: none; /* Ẩn container khi chưa bắt đầu trò chơi */
+    }
+
+    button {
+      width: 100px;
+      height: 100px;
+      font-size: 2em;
+      font-weight: bold;
+      background-color: #ffffff;
+      border: 2px solid #4c77af;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      background-color: #e8f5e9;
+    }
+
+    button:disabled {
+      background-color: #4c77af;
+      color: white;
+      cursor: not-allowed;
+    }
+
+    #start {
+      font-size: 1.5em;
+      padding: 10px 20px;
+      background-color: #4c77af;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    #start:hover {
+      background-color: #4c77af;
+    }
+  </style>
 </head>
 <body>
 <h1>Memory Game</h1>
-<div id="game-container"></div>
+<button id="start">Start</button> <!-- Nút bắt đầu -->
+<div id="game-container"></div> <!-- Container chứa các thẻ trò chơi -->
+
 <script>
-  // Lấy container trò chơi
-  const gameContainer = document.getElementById("game-container");
-
-  // Tạo danh sách các giá trị thẻ
-  const cardValues = ["🍎", "🍌", "🍇", "🍓", "🍒", "🥝", "🍍", "🍉"];
-  const cards = cardValues.concat(cardValues); // Tạo 8 cặp (16 thẻ)
-
-  // Trộn ngẫu nhiên các thẻ
-  cards.sort(() => Math.random() - 0.5);
-
-  // Biến trạng thái
+  const cardValues = ["🐶", "🐱", "🐰", "🦊", "🐻", "🐼", "🐨", "🦁"];
+  const cards = cardValues.concat(cardValues); // 8 cặp (16 thẻ)
   let firstCard = null;
   let secondCard = null;
   let lockBoard = false;
 
   // Hàm khởi tạo thẻ
   function createCards() {
-    cards.forEach((value, index) => {
+    cards.sort(() => Math.random() - 0.5); // Trộn thẻ
+    const gameContainer = document.getElementById("game-container");
+    gameContainer.innerHTML = ''; // Xóa các thẻ cũ nếu có
+
+    cards.forEach((value) => {
       const card = document.createElement("button");
-      card.textContent = "?"; // Hiển thị dấu hỏi khi thẻ chưa lật
-      card.dataset.value = value; // Lưu giá trị của thẻ
-      card.dataset.index = index; // Đánh số thứ tự thẻ
-      card.addEventListener("click", () => flipCard(card)); // Thêm sự kiện click
-      gameContainer.appendChild(card); // Thêm thẻ vào container
+      card.textContent = "?"; // Hiển thị dấu hỏi
+      card.dataset.value = value;
+      card.onclick = () => flipCard(card);
+      gameContainer.appendChild(card);
     });
+
+    gameContainer.style.display = "grid"; // Hiển thị container khi bắt đầu trò chơi
   }
 
   // Hàm lật thẻ
   function flipCard(card) {
-    if (lockBoard || card === firstCard || card.textContent !== "?") return;
+    if (lockBoard || card.textContent !== "?") return;
 
-    card.textContent = card.dataset.value; // Hiển thị giá trị thẻ
+    card.textContent = card.dataset.value;
     if (!firstCard) {
-      firstCard = card; // Lưu thẻ đầu tiên
+      firstCard = card;
     } else {
-      secondCard = card; // Lưu thẻ thứ hai
-      checkMatch(); // Kiểm tra cặp thẻ
+      secondCard = card;
+      checkMatch();
     }
   }
 
@@ -52,27 +115,27 @@
   function checkMatch() {
     lockBoard = true;
     if (firstCard.dataset.value === secondCard.dataset.value) {
-      // Nếu khớp, giữ nguyên giá trị
       resetTurn();
     } else {
-      // Nếu không khớp, ẩn giá trị sau 1 giây
       setTimeout(() => {
         firstCard.textContent = "?";
         secondCard.textContent = "?";
         resetTurn();
-      }, 1000);
+      }, 500);
     }
   }
 
   // Hàm đặt lại trạng thái sau khi kiểm tra
   function resetTurn() {
-    firstCard = null;
-    secondCard = null;
+    firstCard = secondCard = null;
     lockBoard = false;
   }
 
-  // Khởi tạo trò chơi
-  createCards();
+  // Bắt đầu trò chơi khi nhấn nút "Bắt đầu"
+  document.getElementById("start").onclick = function() {
+    createCards();
+  document.getElementById("start").style.display = "none"; // Ẩn nút "Bắt đầu" sau khi bắt đầu trò chơi
+  };
 </script>
 </body>
 </html>
