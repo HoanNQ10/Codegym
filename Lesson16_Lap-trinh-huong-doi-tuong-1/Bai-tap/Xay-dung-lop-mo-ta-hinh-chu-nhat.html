@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rectangle Object</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<h1>Rectangle Demo</h1>
+<canvas id="myCanvas" width="500" height="500"></canvas>
+<p>Diện tích: <span id="area"></span></p>
+<p>Chu vi: <span id="perimeter"></span></p>
+
+<script>
+    // Định nghĩa lớp Rectangle
+    class Rectangle {
+        constructor(length, width) {
+            this.length = length;
+            this.width = width;
+        }
+
+        // Phương thức tính diện tích
+        area() {
+            return this.length * this.width;
+        }
+
+        // Phương thức tính chu vi
+        perimeter() {
+            return 2 * (this.length + this.width);
+        }
+
+        // Phương thức vẽ hình chữ nhật lên canvas
+        draw() {
+            const canvas = document.getElementById("myCanvas");
+            const ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Xóa canvas trước khi vẽ lại
+
+            ctx.beginPath();
+            ctx.rect(50, 50, this.length, this.width); // Vẽ hình chữ nhật
+            ctx.strokeStyle = 'blue'; // Màu viền
+            ctx.lineWidth = 3;
+            ctx.stroke();
+        }
+
+        // Phương thức cập nhật thông tin và vẽ lại
+        update(length, width) {
+            this.length = length;
+            this.width = width;
+            this.draw();
+            document.getElementById("area").textContent = this.area();
+            document.getElementById("perimeter").textContent = this.perimeter();
+        }
+    }
+
+    // Khởi tạo đối tượng Rectangle
+    const myRectangle = new Rectangle(200, 100);
+
+    // Vẽ hình chữ nhật ban đầu
+    myRectangle.draw();
+
+    // Hiển thị diện tích và chu vi ban đầu
+    document.getElementById("area").textContent = myRectangle.area();
+    document.getElementById("perimeter").textContent = myRectangle.perimeter();
+
+    // Cập nhật lại chiều dài và chiều rộng của hình chữ nhật
+    setTimeout(() => {
+        myRectangle.update(300, 150); // Thay đổi chiều dài và chiều rộng
+    }, 3000); // Sau 3 giây, thay đổi và vẽ lại hình chữ nhật
+</script>
+</body>
+</html>
