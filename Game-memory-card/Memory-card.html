@@ -53,7 +53,13 @@
       cursor: not-allowed;
     }
 
-    #start {
+    .matched {
+      background-color: rgb(184, 195, 204);
+      color: white;
+      border-color: #b8c3cc;
+    }
+
+    #start, #replay {
       font-size: 1.5em;
       padding: 10px 20px;
       background-color: #4c77af;
@@ -62,16 +68,24 @@
       border-radius: 5px;
       cursor: pointer;
       margin-top: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    #start:hover {
+    #start:hover, #replay:hover {
       background-color: #4c77af;
+    }
+
+    #replay {
+      display: none; /* Ẩn nút chơi lại */
     }
   </style>
 </head>
 <body>
 <h1>Memory Game</h1>
-<button id="start">Start</button> <!-- Nút bắt đầu -->
+<button id="start">Start</button>
+<button id="replay">Play Again</button>
 <div id="game-container"></div> <!-- Container chứa các thẻ trò chơi -->
 
 <script>
@@ -80,6 +94,7 @@
   let firstCard = null;
   let secondCard = null;
   let lockBoard = false;
+  let matchedPairs = 0;
 
   // Hàm khởi tạo thẻ
   function createCards() {
@@ -96,6 +111,7 @@
     });
 
     gameContainer.style.display = "grid"; // Hiển thị container khi bắt đầu trò chơi
+    matchedPairs = 0; // Đặt lại số cặp khớp khi bắt đầu trò chơi mới
   }
 
   // Hàm lật thẻ
@@ -115,7 +131,11 @@
   function checkMatch() {
     lockBoard = true;
     if (firstCard.dataset.value === secondCard.dataset.value) {
+      firstCard.classList.add("matched");
+      secondCard.classList.add("matched");
+      matchedPairs++;
       resetTurn();
+      checkWin();
     } else {
       setTimeout(() => {
         firstCard.textContent = "?";
@@ -131,10 +151,25 @@
     lockBoard = false;
   }
 
-  // Bắt đầu trò chơi khi nhấn nút "Bắt đầu"
+  // Hàm kiểm tra xem người chơi đã thắng hay chưa
+  function checkWin() {
+    if (matchedPairs === cardValues.length) {
+      setTimeout(() => {
+        alert("Chúc mừng! Bạn đã hoàn thành trò chơi!");
+        document.getElementById("replay").style.display = "block"; // Hiển thị nút chơi lại
+        document.getElementById("game-container").style.display = "none"; // Ẩn container trò chơi
+      }, 500);
+    }
+  }
+
   document.getElementById("start").onclick = function() {
     createCards();
-  document.getElementById("start").style.display = "none"; // Ẩn nút "Bắt đầu" sau khi bắt đầu trò chơi
+    document.getElementById("start").style.display = "none";
+  };
+
+  document.getElementById("replay").onclick = function() {
+    createCards();
+    document.getElementById("replay").style.display = "none"; // Ẩn nút chơi lại
   };
 </script>
 </body>

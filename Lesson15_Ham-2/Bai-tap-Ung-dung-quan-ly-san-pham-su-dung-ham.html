@@ -3,12 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <title>Ứng dụng quản lý</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h2 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        button1, button2 {
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #f0ad4e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button1:hover, button2:hover {
+            background-color: #ec971f;
+        }
+
+        button2 {
+            background-color: #d9534f;
+        }
+
+        button2:hover {
+            background-color: #c9302c;
+        }
+    </style>
+
 </head>
 <body>
     <h2>Add New Product</h2>
 
     <input type="text" id="inputProduct" placeholder="New Product">
-
+    <br>
     <button onclick="addProduct()">Add</button>
 
     <h2>Display All Product</h2>
@@ -16,9 +105,9 @@
     <table id="productTable">
         <thead>
            <tr>
-               <th>Số thứ tự</th>
                <th>Tên sản phẩm</th>
-               <th>Hành động</th>
+               <th></th>
+               <th></th>
            </tr>
         </thead>
         <tbody>
@@ -29,22 +118,66 @@
         let list = ['Iphone 1','Iphone 2','Iphone 3','Iphone 4','Iphone 5','Iphone 6','Iphone 7','Iphone 8'];
 
         //Hàm hiển thị danh sách
-        function displayProduct(productList) {
+        function displayProduct() {
+            const tbody = document.querySelector("#productTable tbody");
+            tbody.innerHTML = "";
 
+        list.forEach((product, index) => {
+            const row = document.createElement("tr");
+
+            // Cột tên sản phẩm
+            const nameCell = document.createElement("td");
+            nameCell.textContent = product;
+            row.appendChild(nameCell);
+
+            // Cột hành động - Edit
+            const actionCell1 = document.createElement("td");
+            const editButton = document.createElement("button1");
+            editButton.textContent = "Edit";
+            editButton.onclick = () => editProduct(index);
+            actionCell1.appendChild(editButton);
+            row.appendChild(actionCell1);
+
+            // Cột hành động - Delete
+            const actionCell2 = document.createElement("td");
+            const deleteButton = document.createElement("button2");
+            deleteButton.textContent = "Delete";
+            deleteButton.onclick = () => deleteProduct(index);
+            actionCell2.appendChild(deleteButton);
+            row.appendChild(actionCell2);
+
+            // Thêm hàng vào bảng
+            tbody.appendChild(row);
+        });
         }
         
-
+        //Hàm thêm sản phẩm
         function addProduct() {
-
+            const newProduct = document.getElementById("inputProduct").value;
+            if (newProduct) {
+                list.push(newProduct);
+                displayProduct(list);
+                document.getElementById("inputProduct").value = ""; // Xóa ô nhập liệu
+            }
         }
 
-        function editProduct() {
-
+        //Hàm chỉnh sửa sản phẩm
+        function editProduct(index) {
+            const newProduct = prompt("Edit Product", list[index]);
+            if (newProduct && newProduct !== list[index]) {
+                list[index] = newProduct;
+                displayProduct(list);
+            }
         }
 
-        function deleteProduct() {
-
+        //Hàm xóa sản phẩm
+        function deleteProduct(index) {
+            list.splice(index, 1);
+            displayProduct(list);
         }
+
+        // Hiển thị danh sách sản phẩm ban đầu
+        displayProduct(list);
     </script>
 </body>
 </html>
