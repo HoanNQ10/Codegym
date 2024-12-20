@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function isPalindrome(s) {
+        // Loại bỏ khoảng trắng và chuyển chuỗi về chữ thường để so sánh không phân biệt hoa thường
+        s = s.replace(/\s+/g, '').toLowerCase();
+
+        // Điều kiện cơ sở: Nếu chuỗi có độ dài 0 hoặc 1, nó là palindrome
+        if (s.length <= 1) {
+            return true;
+        }
+
+        // Kiểm tra ký tự đầu và ký tự cuối
+        if (s[0] !== s[s.length - 1]) {
+            return false;
+        }
+
+        // Đệ quy kiểm tra phần còn lại của chuỗi (bỏ ký tự đầu và ký tự cuối)
+        return isPalindrome(s.slice(1, -1));
+    }
+
+    // Kiểm tra ví dụ
+    console.log(isPalindrome("rotor")); // true
+    console.log(isPalindrome("redder")); // true
+    console.log(isPalindrome("motor")); // false
+    console.log(isPalindrome("A man a plan a canal Panama")); // true
+
+</script>
+</body>
+</html>
