@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="game"></div>
+<script>
+    function Hero(image, top, left, size, speed) {
+        this.image = image;
+        this.top = top;
+        this.left = left;
+        this.size = size;
+        this.speed = speed; // Thêm thuộc tính speed
+        this.directionX = 1; // Hướng di chuyển ngang (1: phải, -1: trái)
+        this.directionY = 1; // Hướng di chuyển dọc (1: xuống, -1: lên)
+
+        this.getHeroElement = function () {
+            return '<img width="' + this.size + '"' +
+                ' height="' + this.size + '"' +
+                ' src="' + this.image + '"' +
+                ' style="top: ' + this.top + 'px; left:' + this.left + 'px; position:absolute;" />';
+        };
+
+        this.move = function () {
+            // Di chuyển theo hướng hiện tại, nhân với tốc độ
+            this.left += this.directionX * this.speed;
+            this.top += this.directionY * this.speed;
+
+            // Kiểm tra biên màn hình
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+
+            if (this.left + this.size > windowWidth || this.left < 0) {
+                this.directionX *= -1; // Đổi hướng ngang
+            }
+            if (this.top + this.size > windowHeight || this.top < 0) {
+                this.directionY *= -1; // Đổi hướng dọc
+            }
+        };
+    }
+
+    // Khởi tạo Hero với tốc độ là 20
+    const hero = new Hero('pngegg.png', 100, 100, 50, 20);
+
+    function start() {
+        // Di chuyển nhân vật
+        hero.move();
+
+        // Hiển thị nhân vật
+        document.getElementById('game').innerHTML = hero.getHeroElement();
+
+        // Lặp lại sau 50ms
+        setTimeout(start, 50);
+    }
+
+    // Bắt đầu
+    start();
+
+</script>
+</body>
+</html>
