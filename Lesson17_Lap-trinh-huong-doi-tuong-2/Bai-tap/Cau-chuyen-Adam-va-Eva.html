@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  class Apple {
+    constructor() {
+      this.weight = 10;
+    }
+
+    getWeight() {
+      return this.weight;
+    }
+
+    eat() {
+      if(this.weight > 0) {
+        this.weight--;
+      }
+    }
+  }
+
+  class Human {
+    constructor(name, weight) {
+      this.name = name;
+      this.weight = weight;
+    }
+
+    speak(words) {
+      console.log(words);
+    }
+
+    eatApple(apple) {
+      if (apple.getWeight() > 0) {
+        this.weight++; //Tăng cân của người lên 1 đơn vị
+        apple.eat(); //Giảm cân nặng của của táo 1 đơn vị
+        document.write(this.name + " ăn táo");
+        document.write("<br>");
+        document.write("Quả táo còn: " + apple.getWeight() + " đơn vị");
+        document.write("<br>");
+        document.write("Cân nặng của " + this.name + " là: " + this.weight + " đơn vị");
+        document.write("<br>");
+        document.write("<br>");
+      } else {
+        document.write("Quả táo đã hết!");
+      }
+    }
+
+
+  }
+  // Khởi tạo quả táo và người
+  let apple = new Apple();
+  let adam = new Human('Adam', 28);
+  let eva = new Human('Eva', 28)
+
+  // Các lượt ăn táo
+  adam.eatApple(apple);
+  eva.eatApple(apple);
+  adam.eatApple(apple);
+  eva.eatApple(apple);
+  adam.eatApple(apple);
+  eva.eatApple(apple);
+  adam.eatApple(apple);
+  eva.eatApple(apple);
+  adam.eatApple(apple);
+  eva.eatApple(apple);
+  adam.eatApple(apple);
+  eva.eatApple(apple);
+
+</script>
+</body>
+</html>
