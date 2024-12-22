@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phát triển game lái xe</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+<h1 style="text-align: center;">Canvas Car Game</h1>
+<canvas id="gameCanvas" width="800" height="600"></canvas>
+
+<script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Khởi tạo hình ảnh và thông số
+    const carImage = new Image();
+    carImage.src = 'car.png'; // Đường dẫn ảnh xe
+    const obstacleImage = new Image();
+    obstacleImage.src = 'obstacle.png'; // Đường dẫn ảnh chướng ngại vật
+    const coinImage = new Image();
+    coinImage.src = 'coin.png'; // Đường dẫn ảnh đồng tiền
+
+    let car = { x: 400, y: 500, width: 50, height: 100, speed: 2, angle: 0 };
+    let obstacles = [{ x: 50, y: 50, width: 50, height: 50 }];
+    let coins = [{ x: 300, y: 200, width: 30, height: 30 }];
+    let score = 0;
+    let isGameOver = false;
+    let keys = {};
+
+    // Vẽ xe
+    function drawCar() {
+        ctx.save();
+        ctx.translate(car.x + car.width / 2, car.y + car.height / 2);
+        ctx.rotate(car.angle);
+        ctx.drawImage(carImage, -car.width / 2, -car.height / 2, car.width, car.height);
+        ctx.restore();
+    }
+
+    // Vẽ chướng ngại vật
+    function drawObstacles() {
+        for (let obstacle of obstacles) {
+            ctx.drawImage(obstacleImage, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+        }
+    }
+
+    // Vẽ phần thưởng
+    function drawCoins() {
+        for (let coin of coins) {
+            ctx.drawImage(coinImage, coin.x, coin.y, coin.width, coin.height);
+        }
+    }
+
+    // Di chuyển xe
+    function moveCar() {
+        if (keys['ArrowUp']) car.y -= car.speed;
+        if (keys['ArrowDown']) car.y += car.speed;
+        if (keys['ArrowLeft']) car.angle -= 0.05;
+        if (keys['ArrowRight']) car.angle += 0.05;
+
+        // Tăng tốc nếu nhấn Ctrl
+        if (keys['Control']) car.speed = 5;
+        else car.speed = 2;
+
+        // Kiểm tra va chạm với chướng ngại vật
+        for (let obstacle of obstacles) {
+            if (
+                car.x < obstacle.x + obstacle.width &&
+                car.x + car.width > obstacle.x &&
+                car.y < obstacle.y + obstacle.height &&
+                car.y + car.height > obstacle.y
+            ) {
+                isGameOver = true;
+            }
+        }
+
+        // Thu thập phần thưởng
+        coins = coins.filter(coin => {
+            if (
+                car.x < coin.x + coin.width &&
+                car.x + car.width > coin.x &&
+                car.y < coin.y + coin.height &&
+                car.y + car.height > coin.y
+            ) {
+                score++;
+                return false; // Loại bỏ phần thưởng đã thu thập
+            }
+            return true;
+        });
+    }
+
+    // Thêm chướng ngại vật ngẫu nhiên
+    function spawnObstacles() {
+        if (Math.random() < 0.01) {
+            obstacles.push({
+                x: Math.random() * (canvas.width - 50),
+                y: -50,
+                width: 50,
+                height: 50
+            });
+        }
+
+        // Di chuyển chướng ngại vật xuống
+        for (let obstacle of obstacles) {
+            obstacle.y += 2;
+        }
+
+        // Loại bỏ chướng ngại vật ngoài màn hình
+        obstacles = obstacles.filter(obstacle => obstacle.y < canvas.height);
+    }
+
+    // Thêm phần thưởng ngẫu nhiên
+    function spawnCoins() {
+        if (Math.random() < 0.02) {
+            coins.push({
+                x: Math.random() * (canvas.width - 30),
+                y: -30,
+                width: 30,
+                height: 30
+            });
+        }
+
+        // Di chuyển phần thưởng xuống
+        for (let coin of coins) {
+            coin.y += 2;
+        }
+
+        // Loại bỏ phần thưởng ngoài màn hình
+        coins = coins.filter(coin => coin.y < canvas.height);
+    }
+
+    // Cập nhật trò chơi
+    function update() {
+        if (isGameOver) {
+            alert(`Game Over! Your score: ${score}`);
+            document.location.reload();
+            return;
+        }
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        moveCar();
+        spawnObstacles();
+        spawnCoins();
+        drawCar();
+        drawObstacles();
+        drawCoins();
+
+        // Hiển thị điểm
+        ctx.font = '20px Arial';
+        ctx.fillStyle = 'black';
+        ctx.fillText(`Score: ${score}`, 10, 20);
+
+        requestAnimationFrame(update);
+    }
+
+    // Lắng nghe sự kiện bàn phím
+    window.addEventListener('keydown', e => (keys[e.key] = true));
+    window.addEventListener('keyup', e => (keys[e.key] = false));
+
+    // Khởi động trò chơi khi ảnh được tải
+    carImage.onload = () => update();
+
+</script>
+</body>
+</html>
