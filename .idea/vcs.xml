@@ -2,5 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Lesson17_Lap-trinh-huong-doi-tuong-2/Bai-tap/Game-di-chuyen-doi-tuong/objects" vcs="Git" />
   </component>
 </project>
