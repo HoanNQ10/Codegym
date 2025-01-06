@@ -8,16 +8,16 @@
 <body>
 
 <script>
-    function Student(id, name, address) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.getInfor = function () {
-            return `ID: ${this.id}, Họ và tên: ${this.name}, Địa chỉ: ${this.address}`;
-        }
+    var x = ['John', 'Chris', 'Mark', 'PJ'];
+
+    if(x.length ==4)
+    {
+        console.log(x[x.length-3]);
     }
-    var student = new Student(1, "hello", "qàafasf");
-    console.log(student.getInfor());
+    else
+    {
+        console.log('Codegym');
+    }
 </script>
 </body>
 </html>

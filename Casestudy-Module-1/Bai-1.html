@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function putAndCheckArray () {
+        //Giải thích chi tiết
+        let number = prompt("Nhập độ dài mảng <= 20");
+        number = parseInt(number);
+
+        if (number > 20 || number <= 0) {
+            alert("Độ dài mảng không hợp lệ!");
+            return;
+        }
+
+
+        let array = [];
+        for (let i = 0; i < number; i++) {
+            let value = prompt(`Nhập giá trị thứ ${i + 1}:`);
+            array.push(parseInt(value));
+        }
+
+        // Hiển thị mảng vừa nhập
+        alert('Mảng vừa nhập:' + array);
+
+        // Kiểm tra mảng có tăng dần đều hay không
+        let isIncreasing = true;
+        for (let i = 1; i <= array.length; i++) {
+            if (array[i] <= array[i - 1]) {
+                isIncreasing = false;
+                break;
+            }
+        }
+
+        if (isIncreasing) {
+            alert("OK");
+        } else {
+            alert("NO");
+        }
+    }
+
+    putAndCheckArray();
+
+</script>
+</body>
+</html>

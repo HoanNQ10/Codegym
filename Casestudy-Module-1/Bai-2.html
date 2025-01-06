@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        function checkTriangle(x,y,z) {
+            if ( x <= 0 || y <= 0 || z <= 0) {
+                alert ("Không phải là cạnh của tam giác")
+                return;
+            }
+
+            if (x + y <= z || y + z <= x || z + x <= y) {
+                alert("Không phải là cạnh của tam giác");
+                return;
+            }
+
+            // Sắp xếp các cạnh để dễ dàng tìm cạnh lớn nhất
+            let sides = [x, y, z].sort((a, b) => a - b);  // Sắp xếp theo thứ tự tăng dần
+            let a = sides[0], b = sides[1], c = sides[2]; // a và b là hai cạnh nhỏ, c là cạnh lớn nhất
+
+            // Kiểm tra điều kiện tam giác vuông
+            if (a * a + b * b === c * c) {
+                alert ("Là cạnh của tam giác vuông");
+            } else {
+                alert ("Chỉ là 3 cạnh của 1 tam giác");
+            }
+        }
+
+        checkTriangle(-3, 5, 7);
+        checkTriangle(1, 2, 3);
+        checkTriangle(3, 4, 5);
+        checkTriangle(4, 12, 10);
+    </script>
+
+</body>
+</html>

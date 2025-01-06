@@ -89,88 +89,107 @@
 <div id="game-container"></div> <!-- Container chứa các thẻ trò chơi -->
 
 <script>
-  const cardValues = ["🐶", "🐱", "🐰", "🦊", "🐻", "🐼", "🐨", "🦁"];
-  const cards = cardValues.concat(cardValues); // 8 cặp (16 thẻ)
-  let firstCard = null;
-  let secondCard = null;
-  let lockBoard = false;
-  let matchedPairs = 0;
 
-  // Hàm khởi tạo thẻ
-  function createCards() {
-    cards.sort(() => Math.random() - 0.5); // Trộn thẻ
-    const gameContainer = document.getElementById("game-container");
-    gameContainer.innerHTML = ''; // Xóa các thẻ cũ nếu có
+    const baseCardValues = ["🐶", "🐱", "🐰", "🦊", "🐻", "🐼", "🐨", "🦁"];
+    let currentLevel = 1; // Level hiện tại
+    let cardValues = []; // Giá trị thẻ cho level hiện tại
+    let cards = [];
+    let firstCard = null;
+    let secondCard = null;
+    let lockBoard = false;
+    let matchedPairs = 0;
 
-    cards.forEach((value) => {
-      const card = document.createElement("button");
-      card.textContent = "?"; // Hiển thị dấu hỏi
-      card.dataset.value = value;
-      card.onclick = () => flipCard(card);
-      gameContainer.appendChild(card);
-    });
-
-    gameContainer.style.display = "grid"; // Hiển thị container khi bắt đầu trò chơi
-    matchedPairs = 0; // Đặt lại số cặp khớp khi bắt đầu trò chơi mới
-  }
-
-  // Hàm lật thẻ
-  function flipCard(card) {
-    if (lockBoard || card.textContent !== "?") return;
-
-    card.textContent = card.dataset.value;
-    if (!firstCard) {
-      firstCard = card;
-    } else {
-      secondCard = card;
-      checkMatch();
+    // Hàm cập nhật số lượng thẻ theo level
+    function updateLevel() {
+      const numPairs = currentLevel === 1 ? 2 : currentLevel === 2 ? 4 : 8; // Số cặp thẻ: 2, 4, 8
+      cardValues = baseCardValues.slice(0, numPairs); // Lấy số lượng thẻ phù hợp
+      cards = cardValues.concat(cardValues); // Tạo danh sách thẻ
     }
-  }
 
-  // Hàm kiểm tra thẻ trùng khớp
-  function checkMatch() {
-    lockBoard = true;
-    if (firstCard.dataset.value === secondCard.dataset.value) {
-      firstCard.classList.add("matched");
-      secondCard.classList.add("matched");
-      matchedPairs++;
-      resetTurn();
-      checkWin();
-    } else {
-      setTimeout(() => {
-        firstCard.textContent = "?";
-        secondCard.textContent = "?";
+    function updateLevelDisplay() {
+      const levelDisplay = document.getElementById("current-level");
+      levelDisplay.textContent = `Level: ${currentLevel}`; // Cập nhật nội dung
+    }
+
+    // Hàm khởi tạo thẻ
+    function createCards() {
+      updateLevel(); // Cập nhật số lượng thẻ
+      cards.sort(() => Math.random() - 0.5); // Trộn thẻ
+      const gameContainer = document.getElementById("game-container");
+      gameContainer.innerHTML = ''; // Xóa các thẻ cũ nếu có
+
+      cards.forEach((value) => {
+        const card = document.createElement("button");
+        card.textContent = "?"; // Hiển thị dấu hỏi
+        card.dataset.value = value;
+        card.onclick = () => flipCard(card);
+        gameContainer.appendChild(card);
+      });
+
+      gameContainer.style.display = "grid"; // Hiển thị container khi bắt đầu trò chơi
+      gameContainer.style.gridTemplateColumns = `repeat(${Math.ceil(Math.sqrt(cards.length))}, 100px)`; // Cập nhật số cột
+      matchedPairs = 0; // Đặt lại số cặp khớp khi bắt đầu trò chơi mới
+    }
+
+    // Hàm lật thẻ
+    function flipCard(card) {
+      if (lockBoard || card.textContent !== "?") return;
+      card.textContent = card.dataset.value;
+      if (!firstCard) {
+        firstCard = card;
+      } else {
+        secondCard = card;
+        checkMatch();
+      }
+    }
+
+    // Hàm kiểm tra thẻ trùng khớp
+    function checkMatch() {
+      lockBoard = true;
+      if (firstCard.dataset.value === secondCard.dataset.value) {
+        firstCard.classList.add("matched");
+        secondCard.classList.add("matched");
+        matchedPairs++;
         resetTurn();
-      }, 500);
+        checkWin();
+      } else {
+        setTimeout(() => {
+          firstCard.textContent = "?";
+          secondCard.textContent = "?";
+          resetTurn();
+        }, 500);
+      }
     }
-  }
 
-  // Hàm đặt lại trạng thái sau khi kiểm tra
-  function resetTurn() {
-    firstCard = secondCard = null;
-    lockBoard = false;
-  }
-
-  // Hàm kiểm tra xem người chơi đã thắng hay chưa
-  function checkWin() {
-    if (matchedPairs === cardValues.length) {
-      setTimeout(() => {
-        alert("Chúc mừng! Bạn đã hoàn thành trò chơi!");
-        document.getElementById("replay").style.display = "block"; // Hiển thị nút chơi lại
-        document.getElementById("game-container").style.display = "none"; // Ẩn container trò chơi
-      }, 500);
+    // Hàm đặt lại trạng thái sau khi kiểm tra
+    function resetTurn() {
+      firstCard = secondCard = null;
+      lockBoard = false;
     }
-  }
 
-  document.getElementById("start").onclick = function() {
-    createCards();
-    document.getElementById("start").style.display = "none";
-  };
+    // Hàm kiểm tra xem người chơi đã thắng hay chưa
+    function checkWin() {
+      if (matchedPairs === cardValues.length) {
+        setTimeout(() => {
+          alert(`Chúc mừng! Bạn đã hoàn thành Level ${currentLevel}!`);
+          currentLevel++; // Tăng level
+          createCards(); // Tạo thẻ mới cho level tiếp theo
+        }, 500);
+      }
+    }
 
-  document.getElementById("replay").onclick = function() {
-    createCards();
-    document.getElementById("replay").style.display = "none"; // Ẩn nút chơi lại
-  };
+    document.getElementById("start").onclick = function() {
+      createCards();
+      document.getElementById("start").style.display = "none";
+    };
+
+    document.getElementById("replay").onclick = function() {
+      currentLevel = 1; // Đặt lại level
+      createCards();
+      document.getElementById("replay").style.display = "none"; // Ẩn nút chơi lại
+    };
+</script>
+
 </script>
 </body>
 </html>
